@@ -138,7 +138,8 @@ class os_t:
 
 		# memory size words = 16384
 		# words = 4 
-		first_free_addr = self.current_task.paddr_offset
+		# offset
+		first_free_addr = 0
 		free_addr = self.memory.get_size()
 		# paddr_max
 		# paddr_offset
@@ -146,8 +147,9 @@ class os_t:
 			first_free_addr = (self.idle_task.paddr_max + 1)
 			free_addr = free_addr - first_free_addr 
 
-		if (words <= free_addr):
 		# Retornar tupla <primeiro endereco livre>, <ultimo endereco livre>
+		# words = 4 
+		if (words <= free_addr):
 			return first_free_addr, (first_free_addr + words) - 1
 
 		# if we get here, there is no free space to put the task
