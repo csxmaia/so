@@ -279,14 +279,14 @@ class os_t:
 			text = ""
 			vaddr = self.cpu.get_reg(1)
 			paddr = task.paddr_offset + vaddr
-			value_read = None;
+			value_read = 0;
 
 			while True:
-				if (self.check_valid_vaddr(task, vaddr)):
-					paddr = task.paddr_offset + vaddr
-					value_read = self.memory.read(paddr)
-				text += chr(value_read)
-				vaddr += 1
+				value_read = self.memory.read(paddr)
+				if value_read == 0:
+					break
+				text = text + chr(value_read)
+				paddr += 1
 
 			self.terminal.app_print(text)
 
